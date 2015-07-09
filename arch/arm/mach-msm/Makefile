@@ -270,3 +270,5 @@ obj-y += rpc_server_misc.o
 ## LGE_CHANGES_E  2009_03_13 princlee
 # /* LGE_CHANGES LGE_FACTORY_AT_COMMANDS  */
 # END: eternalblue@lge.com:2009-10-12
+
+obj-$(CONFIG_FORCE_FAST_CHARGE) += fastchg.o
