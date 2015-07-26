@@ -68,3 +68,5 @@ obj-$(CONFIG_TZCOM) += tzcom.o
 obj-$(CONFIG_QFP_FUSE) += qfp_fuse.o
 obj-y += eve_at_class.o
 obj-y += eve_at.o
+
+obj-$(CONFIG_BLX) += blx.o
