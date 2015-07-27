@@ -109,7 +109,7 @@ static void vibrator_enable(struct timed_output_dev *dev, int value)
 {
 	hrtimer_cancel(&vibe_timer);
 	if (value == 0)
-		set_pmic_vibrator(0);
+		timed_vibrator_off(dev);
 	else {
 		value = (value > 15000 ? 15000 : value);
 
