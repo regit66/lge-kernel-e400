@@ -102,6 +102,11 @@ module_param(te_lines, uint, 0644);
 module_param(mactl, uint, 0644);
 #endif
 
+/* LGE_CHANGE_S: E0 jiwon.seo@lge.com [2011-11-22] : BL control error fix */
+extern int Is_Backlight_Set ; 
+extern int bu61800_force_set(void);
+//extern int mcs8000_ts_on(void);
+
 static void tovis_qvga_disp_init(struct platform_device *pdev)
 {
 	struct msm_fb_data_type *mfd;
@@ -157,6 +162,12 @@ static int ilitek_qvga_disp_off(struct platform_device *pdev)
 
 	msm_fb_ebi2_power_save(0);
 	display_on = FALSE;
+
+	if(Is_Backlight_Set)
+	{
+		msleep(50);
+		bu61800_force_set(); //force the BL off
+	}
 
 	return 0;
 }
@@ -788,11 +799,6 @@ static void do_lgd_init(struct platform_device *pdev)
 }
 
 
-/* LGE_CHANGE_S: E0 jiwon.seo@lge.com [2011-11-22] : BL control error fix */
-extern int Is_Backlight_Set ; 
-extern int bu61800_force_set(void);
-//extern int mcs8000_ts_on(void);
-
 /* LGE_CHANGE_E: E0 jiwon.seo@lge.com [2011-11-22] : BL control error fix */
 
 
@@ -992,4 +998,3 @@ static int __init tovis_qvga_init(void)
 }
 
 module_init(tovis_qvga_init);
-
