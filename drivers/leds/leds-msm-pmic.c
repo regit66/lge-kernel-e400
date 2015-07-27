@@ -29,8 +29,8 @@ static void msm_keypad_bl_led_set(struct led_classdev *led_cdev,
 	int brightness;
 
 	/* debug mesg */
-	printk(KERN_INFO " LED DEBUG: Value is %d\n", value);
-	if (value == 0)
+	printk (" LED DEBUG: Value is %d \n",value);
+	if(value == 0)
 		on_off = (int)PM_MPP__I_SINK__SWITCH_DIS;
 	else
 		on_off = (int)PM_MPP__I_SINK__SWITCH_ENA;
@@ -84,6 +84,17 @@ static void msm_keypad_bl_led_set(struct led_classdev *led_cdev,
 	}
 }
 
+#if 0  /* QCT led fuction */
+static void msm_keypad_bl_led_set(struct led_classdev *led_cdev,
+	enum led_brightness value)
+{
+	int ret;
+
+	ret = pmic_set_led_intensity(LED_KEYPAD, value / MAX_KEYPAD_BL_LEVEL);
+	if (ret)
+		dev_err(led_cdev->dev, "can't set keypad backlight\n");
+}
+#endif
 static struct led_classdev msm_kp_bl_led = {
 	.name			= "button-backlight",
 	.brightness_set		= msm_keypad_bl_led_set,
